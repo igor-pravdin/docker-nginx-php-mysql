@@ -1,5 +1,12 @@
 FROM php:7.4-fpm
 
+#ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV PATH $PATH:/root/.composer/vendor/bin
+
+VOLUME ["/var/www"]
+
+WORKDIR /var/www
+
 RUN apt-get update && apt-get install -y \
         curl \
         wget \
@@ -18,4 +25,6 @@ RUN apt-get update && apt-get install -y \
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-WORKDIR /var/www
+RUN composer global require laravel/installer
+
+#RUN laravel new foo
