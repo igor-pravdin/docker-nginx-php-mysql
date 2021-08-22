@@ -1,3 +1,3 @@
 <?php
 
-echo "Foo-Foo";
+echo "Foo-Bar-Baz";

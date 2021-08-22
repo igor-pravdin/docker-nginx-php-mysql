@@ -16,19 +16,10 @@ services:
       MYSQL_USER: foo
       MYSQL_PASSWORD: foo
 
-  node:
-    container_name: nodejs
-    image: node
-    user: "node"
-    working_dir: /var/www
-    volumes:
-      - ./www:/var/www
-
   php:
     container_name: php
     depends_on:
       - mysql
-      - node
     build: ./images/php
     volumes:
       - ./www:/var/www:rw
@@ -46,9 +37,9 @@ services:
 
   adminer:
     container_name: adminer
+    image: adminer
     depends_on:
       - mysql
-    image: adminer
     ports:
       - "8080:8080"
 
